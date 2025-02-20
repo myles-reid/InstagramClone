@@ -8,5 +8,9 @@ namespace InstagramClone.BLL {
 		public CommentService(InsDataContext context) {
 			commentRepo = new CommentRepository(context);
 		}
+
+		public List<Comment> GetComments(int postId) {
+			return commentRepo.GetComments(postId);
+		}
 	}
 }
