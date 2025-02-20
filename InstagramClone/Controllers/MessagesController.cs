@@ -6,6 +6,10 @@ namespace InstagramClone.Controllers {
 	public class MessagesController : Controller {
 		private readonly DirectMessageService DirectMessageService;
 
+		public MessagesController(DirectMessageService directMessageService) {
+			DirectMessageService = directMessageService;
+		}
+
 		// Get all the users messages and display them
 		public IActionResult Index(int id) {
 			List<DirectMessage> messages = DirectMessageService.GetUserMessages(id);

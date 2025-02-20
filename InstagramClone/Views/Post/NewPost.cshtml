@@ -1,4 +1,5 @@
-﻿@model PostViewModel
+﻿@using InstagramClone.Models
+@model Post
 
 @{
 	ViewData["Title"] = "New Post";
@@ -10,7 +11,7 @@
 	<div class="form-group">
 		<label asp-for="ImageUrl" class="lead"><strong>Add image file path</strong></label>
 		<input asp-for="ImageUrl" class="form-control" />
-		<span asp-validation-for="ImageInput" class="text-danger"></span>
+		<span asp-validation-for="ImageUrl" class="text-danger"></span>
 	</div>
 	<div class="form-group">
 		<label asp-for="Caption" class="lead"><strong>Caption</strong></label>

@@ -1,3 +1,5 @@
+using InstagramClone.BLL;
+using InstagramClone.DAL;
 using InstagramClone.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +13,22 @@ namespace InstagramClone {
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
+
+			// BLL
+			builder.Services.AddTransient<CommentService>();
+			builder.Services.AddTransient<DirectMessageService>();
+			builder.Services.AddTransient<PostService>();
+			builder.Services.AddTransient<StoryService>();
+			builder.Services.AddTransient<UserInteractionService>();
+			builder.Services.AddTransient<UserService>();
+
+			// DAL
+			builder.Services.AddTransient<UserRepository>();
+			builder.Services.AddTransient<CommentRepository>();
+			builder.Services.AddTransient<DirectMessageRepository>();
+			builder.Services.AddTransient<PostRepository>();
+			builder.Services.AddTransient<StoryRepository>();
+			builder.Services.AddTransient<UserInteractionRepository>();
 
 			var app = builder.Build();
 

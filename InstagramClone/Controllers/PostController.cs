@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace InstagramClone.Controllers {
 	public class PostController : Controller {
 		private readonly PostService _postService;
+		public PostController(PostService postService) {
+			_postService = postService;
+		}
 
 		public IActionResult Index() {
 			return View();
