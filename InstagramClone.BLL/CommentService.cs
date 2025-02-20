@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using InstagramClone.DAL;
+using InstagramClone.Models;
 
-namespace InstagramClone.BLL
-{
-    class CommentService
-    {
-    }
+namespace InstagramClone.BLL {
+	class CommentService {
+		private readonly CommentRepository commentRepo;
+
+		public CommentService(InsDataContext context) {
+			commentRepo = new CommentRepository(context);
+		}
+	}
 }
