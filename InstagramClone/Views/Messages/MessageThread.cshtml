@@ -1,0 +1,25 @@
+﻿@model DirectMessage
+
+@*
+	Add In here all previous messages between two UserIDS. This will have to 
+	be a query finding all messages between the same two users
+
+	Probably have a foreach loop where each message has the userID of both in either position.
+
+	The User that is viewing the messages will be on the right, with the other on the left
+
+	This will use a partial view to display the messages - Not complicated, basically just a <p> tag
+*@
+<div>
+	@foreach (DirectMessage message in ViewBag.Messages) { @*Will have to change from Viewbags*@
+		<partial name="_Message" model="message" />
+	}
+</div>
+
+<form asp-action="SendMessage">
+	<div class="form-group">
+		<label asp-for="MessageContent" class="lead"><strong>Message</strong></label>
+		<textarea asp-for="MessageContent" class="form-control"></textarea>
+	</div>
+	<button type="submit" class="btn btn-success">Send</button>
+</form>

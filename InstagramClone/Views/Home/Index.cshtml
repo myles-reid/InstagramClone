@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <div>
+        <h1 class="display-4">InstaClone</h1>
+    </div>
+    <div>
+        <button class="btn accept-policy"><a href="Post/NewPost">New Post</a></button>
+    </div>
+    <div>
+        <!--Grid-->
+        <div>
+            @foreach (Post post in ViewBag.Posts) {
+                <partial name="_Post" model="post" />
+            }
+        </div>
+        <div>
+            @foreach (User user in ViewBag.Users)
+            {
+				<partial name="_UserTab" model="user" />
+            }
+            <!--People you follow, etc-->
+        </div>
+    </div>
+
+</div>

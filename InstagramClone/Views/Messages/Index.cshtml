@@ -1,0 +1,28 @@
+﻿@model IEnumerable<DirectMessage>
+@{
+	ViewData["Title"] = "Direct Messgaes";
+}
+
+<h2>Direct Messages</h2>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>User</th>
+			<th>Preview</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (DirectMessage c in Model) {
+			<tr>
+				<td>@c.SenderID</td> <!--Change this to USERNAME & ProfilePic-->
+				<td>@c.MessageContent</td>
+				<td>
+					<a href="/Message/Thread/@c.MessageID" class="btn btn-primary">View Thread</a>
+					<a href="/Message/Delete/@c.MessageID" class="btn btn-info">Delete Message</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

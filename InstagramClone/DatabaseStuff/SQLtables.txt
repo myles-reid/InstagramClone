@@ -1,0 +1,91 @@
+CREATE TABLE [User] (
+    user_id INT PRIMARY KEY IDENTITY(1,1),
+    username NVARCHAR(50) UNIQUE NOT NULL,
+    password_hash NVARCHAR(255) NOT NULL,
+    email NVARCHAR(100) UNIQUE NOT NULL,
+    bio TEXT,
+    profile_picture NVARCHAR(255),
+    NumFollower INT DEFAULT 0,
+    NumFollowing INT DEFAULT 0,
+    created_at DATETIME DEFAULT GETDATE(),
+    updated_at DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Post (
+    post_id INT PRIMARY KEY IDENTITY(1,1),
+    user_id INT NOT NULL,
+    caption TEXT,
+    image_url INT,
+    created_at DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (user_id) REFERENCES [User](user_id) ON DELETE NO ACTION,
+    FOREIGN KEY (image_url) REFERENCES PostImages.link_id ON DELETE NO ACTION
+);
+
+CREATE TABLE PostImages (
+    link_id INT NOT NULL IDENTITY(1,1),
+    post_id INT NOT NULL,
+    image_url NVARCHAR(255) NOT NULL
+)
+
+CREATE TABLE Story (
+    story_id INT PRIMARY KEY IDENTITY(1,1),
+    user_id INT NOT NULL,
+    image_url NVARCHAR(255) NOT NULL,
+    numViews INT NOT NULL,
+    created_at DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (user_id) REFERENCES [User](user_id) ON DELETE NO ACTION
+);
+
+ALTER TABLE Story ADD expires_at AS DATEADD(HOUR, 24, created_at) PERSISTED;
+
+CREATE TABLE Comment (
+    comment_id INT PRIMARY KEY IDENTITY(1,1),
+    post_id INT NOT NULL,
+    user_id INT NOT NULL,
+    text TEXT NOT NULL,
+    created_at DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (post_id) REFERENCES Post(post_id) ON DELETE NO ACTION,
+    FOREIGN KEY (user_id) REFERENCES [User](user_id) ON DELETE NO ACTION
+);
+
+CREATE TABLE UserInteraction (
+    interaction_id INT PRIMARY KEY IDENTITY(1,1),
+    user_id INT NOT NULL,
+    post_id INT,
+    story_id INT,
+    interaction_type NVARCHAR(10) CHECK (interaction_type IN ('like', 'save')),
+    created_at DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (user_id) REFERENCES [User](user_id) ON DELETE NO ACTION,
+    FOREIGN KEY (post_id) REFERENCES Post(post_id) ON DELETE NO ACTION,
+    FOREIGN KEY (story_id) REFERENCES Story(story_id) ON DELETE NO ACTION
+);
+
+CREATE TABLE Follow (
+    follow_id INT PRIMARY KEY IDENTITY(1,1),
+    follower_id INT NOT NULL,
+    followed_id INT NOT NULL,
+    created_at DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (follower_id) REFERENCES [User](user_id) ON DELETE NO ACTION,
+    FOREIGN KEY (followed_id) REFERENCES [User](user_id) ON DELETE NO ACTION,
+    UNIQUE (follower_id, followed_id)
+);
+
+CREATE TABLE DirectMessage (
+    message_id INT PRIMARY KEY IDENTITY(1,1),
+    sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
+    message_text TEXT NOT NULL,
+    created_at DATETIME DEFAULT GETDATE(),
+    is_read BIT DEFAULT 0,
+    FOREIGN KEY (sender_id) REFERENCES [User](user_id) ON DELETE NO ACTION,
+    FOREIGN KEY (receiver_id) REFERENCES [User](user_id) ON DELETE NO ACTION
+);
+
+CREATE TABLE StoryView (
+    view_id INT PRIMARY KEY IDENTITY(1,1),
+    user_id INT NOT NULL,
+    story_id INT NOT NULL,
+    viewed_at DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (user_id) REFERENCES [User](user_id) ON DELETE NO ACTION,
+    FOREIGN KEY (story_id) REFERENCES Story(story_id) ON DELETE NO ACTION
+);
