@@ -1,4 +1,4 @@
 ﻿namespace InstagramClone.DAL {
-	class StoryRepository {
+	public class StoryRepository {
 	}
 }

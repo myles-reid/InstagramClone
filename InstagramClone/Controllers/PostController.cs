@@ -1,8 +1,11 @@
-﻿using InstagramClone.Models;
+﻿using InstagramClone.BLL;
+using InstagramClone.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InstagramClone.Controllers {
 	public class PostController : Controller {
+		private readonly PostService _postService;
+
 		public IActionResult Index() {
 			return View();
 		}
@@ -13,10 +16,9 @@ namespace InstagramClone.Controllers {
 		}
 
 		[HttpPost]
-		public IActionResult NewPost(PostViewModel newPost, int userID) {
+		public IActionResult NewPost(Post newPost) {
 			if (ModelState.IsValid) {
-				newPost.Images = AddImages(newPost);
-				//newPost.TaggedUsers = AddTags(newPost);
+				_postService.AddPost(newPost);
 				return RedirectToAction("Home/Index");
 			}
 			return View(newPost);
@@ -24,47 +26,47 @@ namespace InstagramClone.Controllers {
 
 		// Will need to link this to the database via Entity Framework
 		[HttpGet]
-		public IActionResult EditPost(int postId) {
-			//Post post = posts.Find(p => p.PostId == postId);
-			return View(/*post*/);
+		public IActionResult EditPost(int id, int userId) {
+			Post post = (Post)_postService.GetUserPosts(id).Where(p => p.UserId == userId);
+			return View(post);
 		}
 
 		[HttpPost]
-		public IActionResult EditPost(PostViewModel post) {
+		public IActionResult EditPost(Post post, int id) {
 			if (ModelState.IsValid) {
-				//Post oldPost = posts.Find(p => p.PostId == post.PostId);
-				//oldPost.Images = AddImages(post);
-				//oldPost.Timestamp = DateTime.Now;
-				//oldPost.TaggedUsers = AddTags(post);
+				Post oldPost = (Post)_postService.GetUserPosts(id).Where(p => p.UserId == id && p.PostId == post.PostId);
+				_postService.EditPost(oldPost);
 				return RedirectToAction("Home/Index");
 			}
 			return View(post);
 		}
-		private List<string> AddImages(PostViewModel post) {
-			List<string> images = new List<string>();
-			if (post.ImageInput == null) {
-				post.ImageInput = "";
-			} else {
-				string[] split = post.ImageInput.Split(", ");
-				foreach (string s in split) {
-					images.Add(s);
-				}
-			}
-			return images;
-		}
 
-		// This needs to be updated to get UserID instead of Username
-		private List<string> AddTags(PostViewModel post) {
-			List<string> tags = new List<string>();
-			if (post.TaggedUsersInput == null) {
-				post.TaggedUsersInput = "";
-			} else {
-				string[] split = post.ImageInput.Split(", ");
-				foreach (string s in split) {
-					tags.Add(s);
-				}
-			}
-			return tags;
-		}
+		// Use for multiple images and user tags
+		//private List<string> AddImages(Post post) {
+		//	List<string> images = new List<string>();
+		//	if (post.ImageUrl == null) {
+		//		post.ImageInput = "";
+		//	} else {
+		//		string[] split = post.ImageInput.Split(", ");
+		//		foreach (string s in split) {
+		//			images.Add(s);
+		//		}
+		//	}
+		//	return images;
+		//}
+
+		//// This needs to be updated to get UserID instead of Username
+		//private List<string> AddTags(PostViewModel post) {
+		//	List<string> tags = new List<string>();
+		//	if (post.TaggedUsersInput == null) {
+		//		post.TaggedUsersInput = "";
+		//	} else {
+		//		string[] split = post.ImageInput.Split(", ");
+		//		foreach (string s in split) {
+		//			tags.Add(s);
+		//		}
+		//	}
+		//	return tags;
+		//}
 	}
 }

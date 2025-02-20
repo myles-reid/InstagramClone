@@ -1,4 +1,4 @@
 ﻿namespace InstagramClone.BLL {
-	class StoryService {
+	public class StoryService {
 	}
 }

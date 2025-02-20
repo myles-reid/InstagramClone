@@ -11,9 +11,7 @@
 		<p><!--Username--></p>
 	</div>
 	<div class="post-image">
-		@foreach (string image in Model.Images) {
-			<img src="@image" alt="PostImage" />
-		}
+		<img src="@Model.ImageUrl" alt="PostImage" />
 	</div>
 	<div class="interactions">
 		<a href="PostID/Like">Like</a>
@@ -23,6 +21,6 @@
 	<div class="info">
 		<p><!--get interactions of who liked it--></p>
 		<p>@Model.Caption</p>
-		<p>@Model.Timestamp</p>
+		<p>@Model.CreatedAt</p>
 	</div>
 </div>

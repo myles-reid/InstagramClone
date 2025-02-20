@@ -16,11 +16,14 @@
 	<tbody>
 		@foreach (DirectMessage c in Model) {
 			<tr>
-				<td>@c.SenderID</td> <!--Change this to USERNAME & ProfilePic-->
-				<td>@c.MessageContent</td>
 				<td>
-					<a href="/Message/Thread/@c.MessageID" class="btn btn-primary">View Thread</a>
-					<a href="/Message/Delete/@c.MessageID" class="btn btn-info">Delete Message</a>
+					@{ViewBag.User.Sender = c.SenderId;} @*This logic needs updating to make sure its always the other user*@
+					<partial name="_UserTab" model="ViewBag.User.Sender" />
+				</td> 
+				<td>@c.MessageText</td>
+				<td>
+					<a href="/Message/Thread/@c.MessageId" class="btn btn-primary">View Thread</a>
+					<a href="/Message/Delete/@c.MessageId" class="btn btn-info">Delete Message</a>
 				</td>
 			</tr>
 		}

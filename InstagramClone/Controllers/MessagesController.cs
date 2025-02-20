@@ -5,13 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace InstagramClone.Controllers {
 	public class MessagesController : Controller {
 		private readonly DirectMessageService DirectMessageService;
-		public IActionResult Index() {
-			return View();
-		}
 
-		// all messages for the SINGLE user
-		public IActionResult UserMessages(int userID) {
-			List<DirectMessage> messages = DirectMessageService.GetUserMessages(userID);
+		// Get all the users messages and display them
+		public IActionResult Index(int id) {
+			List<DirectMessage> messages = DirectMessageService.GetUserMessages(id);
 			return View(messages);
 		}
 

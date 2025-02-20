@@ -8,17 +8,13 @@
 
 <form asp-action="NewPost">
 	<div class="form-group">
-		<label asp-for="ImageInput" class="lead"><strong>Add image file paths, seperated by a comma</strong></label>
-		<input asp-for="ImageInput" class="form-control" />
+		<label asp-for="ImageUrl" class="lead"><strong>Add image file path</strong></label>
+		<input asp-for="ImageUrl" class="form-control" />
 		<span asp-validation-for="ImageInput" class="text-danger"></span>
 	</div>
 	<div class="form-group">
 		<label asp-for="Caption" class="lead"><strong>Caption</strong></label>
 		<input asp-for="Caption" class="form-control" />
-	</div>
-	<div class="form-group">
-		<label asp-for="TaggedUsersInput" class="lead"><strong>Add Usernames to be tagged</strong></label>
-		<textarea asp-for="TaggedUsersInput" class="form-control"></textarea>
 	</div>
 	<button type="submit" class="btn btn-success">Create</button>
 </form>

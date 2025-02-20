@@ -2,7 +2,7 @@
 using InstagramClone.Models;
 
 namespace InstagramClone.BLL {
-	class CommentService {
+	public class CommentService {
 		private readonly CommentRepository commentRepo;
 
 		public CommentService(InsDataContext context) {

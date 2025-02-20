@@ -1,4 +1,4 @@
 ﻿namespace InstagramClone.DAL {
-	class UserInteractionRepository {
+	public class UserInteractionRepository {
 	}
 }
