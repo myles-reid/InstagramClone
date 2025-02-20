@@ -16,7 +16,7 @@ namespace InstagramClone.Controllers {
 		public IActionResult NewPost(PostViewModel newPost, int userID) {
 			if (ModelState.IsValid) {
 				newPost.Images = AddImages(newPost);
-				newPost.TaggedUsers = AddTags(newPost);
+				//newPost.TaggedUsers = AddTags(newPost);
 				return RedirectToAction("Home/Index");
 			}
 			return View(newPost);
@@ -25,17 +25,17 @@ namespace InstagramClone.Controllers {
 		// Will need to link this to the database via Entity Framework
 		[HttpGet]
 		public IActionResult EditPost(int postId) {
-			Post post = posts.Find(p => p.PostId == postId);
-			return View(post);
+			//Post post = posts.Find(p => p.PostId == postId);
+			return View(/*post*/);
 		}
 
 		[HttpPost]
 		public IActionResult EditPost(PostViewModel post) {
 			if (ModelState.IsValid) {
-				Post oldPost = posts.Find(p => p.PostId == post.PostId);
-				oldPost.Images = AddImages(post);
-				oldPost.Timestamp = DateTime.Now;
-				oldPost.TaggedUsers = AddTags(post);
+				//Post oldPost = posts.Find(p => p.PostId == post.PostId);
+				//oldPost.Images = AddImages(post);
+				//oldPost.Timestamp = DateTime.Now;
+				//oldPost.TaggedUsers = AddTags(post);
 				return RedirectToAction("Home/Index");
 			}
 			return View(post);

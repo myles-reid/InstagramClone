@@ -1,32 +1,34 @@
-namespace InstagramClone
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+using InstagramClone.Models;
+using Microsoft.EntityFrameworkCore;
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+namespace InstagramClone {
+	public class Program {
+		public static void Main(string[] args) {
+			var builder = WebApplication.CreateBuilder(args);
 
-            var app = builder.Build();
+			builder.Services.AddDbContext<InsDataContext>(options =>
+				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
-            app.UseStaticFiles();
+			// Add services to the container.
+			builder.Services.AddControllersWithViews();
 
-            app.UseRouting();
+			var app = builder.Build();
 
-            app.UseAuthorization();
+			// Configure the HTTP request pipeline.
+			if (!app.Environment.IsDevelopment()) {
+				app.UseExceptionHandler("/Home/Error");
+			}
+			app.UseStaticFiles();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+			app.UseRouting();
 
-            app.Run();
-        }
-    }
+			app.UseAuthorization();
+
+			app.MapControllerRoute(
+				name: "default",
+				pattern: "{controller=Home}/{action=Index}/{id?}");
+
+			app.Run();
+		}
+	}
 }
