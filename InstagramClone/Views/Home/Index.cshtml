@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Post>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -12,7 +13,7 @@
     <div>
         <!--Grid-->
         <div>
-            @foreach (Post post in ViewBag.Posts) {
+            @foreach (Post post in Model) {
                 <partial name="_Post" model="post" />
             }
         </div>

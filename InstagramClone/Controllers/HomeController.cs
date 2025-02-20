@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using InstagramClone.BLL;
 using InstagramClone.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,13 +7,20 @@ namespace InstagramClone.Controllers;
 
 public class HomeController : Controller {
 	private readonly ILogger<HomeController> _logger;
+	private readonly PostService _postService;
+	private readonly UserService _userService;
 
-	public HomeController(ILogger<HomeController> logger) {
+	public HomeController(ILogger<HomeController> logger, PostService pService, UserService uSerivce) {
 		_logger = logger;
+		_postService = pService;
+		_userService = uSerivce;
 	}
 
 	public IActionResult Index() {
-		return View();
+		List<Post> posts = _postService.GetAllPosts();
+		ViewBag.Users = _userService.GetUsers();
+		ViewBag.ActiveUser = _userService.GetUserInfo(1);
+		return View(posts);
 	}
 
 	public IActionResult Privacy() {
