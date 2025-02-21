@@ -22,6 +22,7 @@ namespace InstagramClone.BLL {
 			postRepo.NewPost(post);
 		}
 		public void DeletePost(Post post) {
+			// add a validation to ensure user wants to delete post
 			postRepo.DeletePost(post);
 		}
 
