@@ -1,29 +1,26 @@
 ﻿@model Post
+@{
+	//Use ViewBag.User for the current user from the controller
+	//Use ViewBag.Interactions to get the interactions from controller
+}
 
-<div class="post">
-    <!-- User Info -->
-    <div class="post-header">
-        <img src="@Model.User.ProfilePicture" alt="Profile Picture" class="post-profile-pic" />
-        <a href="@Url.Action("Profile", "User", new { username = Model.User.Username })" class="post-username">
-            @Model.User.Username
-        </a>
-    </div>
 
-    <!-- Post Image -->
-    <div class="post-image">
-        <img src="@Model.ImageUrl" alt="Post Image" />
-    </div>
-
-    <!-- Interactions -->
-    <div class="post-interactions">
-        <a href="@Url.Action("Like", "Post", new { id = Model.PostId })" class="post-action">Like</a>
-        <a href="@Url.Action("Comment", "Post", new { id = Model.PostId })" class="post-action">Comment</a>
-        <a href="@Url.Action("Save", "Post", new { id = Model.PostId })" class="post-action">Save</a>
-    </div>
-
-    <!-- Post Info -->
-    <div class="post-info">
-        <p class="post-caption">@Model.Caption</p>
-        <p class="post-timestamp">@Model.CreatedAt?.ToString("MMM d, yyyy h:mm tt")</p>
-    </div>
+<div>
+	<div class="user-info">
+		<img src="userID/Profilepic" alt="ProfilePic" />
+		<p><!--Username--></p>
+	</div>
+	<div class="post-image">
+		<img src="@Model.ImageUrl" alt="PostImage" />
+	</div>
+	<div class="interactions">
+		<a href="PostID/Like">Like</a>
+		<a href="PostID/Comment">Comment</a>
+		<a href="PostID/save">save</a>
+	</div>
+	<div class="info">
+		<p><!--get interactions of who liked it--></p>
+		<p>@Model.Caption</p>
+		<p>@Model.CreatedAt</p>
+	</div>
 </div>

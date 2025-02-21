@@ -19,7 +19,7 @@ public class HomeController : Controller {
 	public IActionResult Index() {
 		List<Post> posts = _postService.GetAllPosts();
 		ViewBag.Users = _userService.GetUsers();
-		ViewBag.ActiveUser = _userService.GetUserInfo(1);
+		TempData["ActiveUser"] = _userService.GetUserInfo(1);
 		return View(posts);
 	}
 

@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Post>
 @{
     ViewData["Title"] = "Home Page";
+    User activeUser = (User)TempData["ActiveUser"];
 }
 
 <div class="container">
