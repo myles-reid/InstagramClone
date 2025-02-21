@@ -2,35 +2,25 @@
 @{
 	//Use ViewBag.User for the current user from the controller
 	//Use ViewBag.Interactions to get the interactions from controller
-	List<User> users = ViewBag.Users;
-	User user = users.Find(u => u.UserId == Model.UserId);
-	User active = (User)TempData["ActiveUser"];
 }
 
 
 <div>
-	<div class="d-flex gap-10 user-info">
+	<div class="user-info">
 		<img src="userID/Profilepic" alt="ProfilePic" />
-		<p><strong>@user.Username</strong></p>
+		<p><!--Username--></p>
 	</div>
 	<div class="post-image">
 		<img src="@Model.ImageUrl" alt="PostImage" />
 	</div>
-	
+	<div class="interactions">
+		<a href="PostID/Like">Like</a>
+		<a href="PostID/Comment">Comment</a>
+		<a href="PostID/save">save</a>
+	</div>
 	<div class="info">
 		<p><!--get interactions of who liked it--></p>
 		<p>@Model.Caption</p>
 		<p>@Model.CreatedAt</p>
 	</div>
-	<div class="interactions">
-		<a href="PostID/Like">Like</a>
-		<a href="PostID/Comment">Comment</a>
-		<a href="PostID/save">Save</a>
-	</div>
-	@if (Model.UserId == active.UserId) {
-		<div class="edit">
-			<a href="Post/EditPost">Edit</a>
-			<a href="Post/DeletePost">Delete</a>
-		</div>
-	}
 </div>
