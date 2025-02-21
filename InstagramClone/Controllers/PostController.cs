@@ -30,7 +30,7 @@ namespace InstagramClone.Controllers {
 		// Will need to link this to the database via Entity Framework
 		[HttpGet]
 		public IActionResult EditPost(int id, int userId) {
-			Post post = (Post)_postService.GetUserPosts(id).Where(p => p.UserId == userId);
+			Post post = (Post)_postService.GetUserPosts(userId).Where(p => p.PostId == id);
 			return View(post);
 		}
 
@@ -42,6 +42,11 @@ namespace InstagramClone.Controllers {
 				return RedirectToAction("Home/Index");
 			}
 			return View(post);
+		}
+
+		public IActionResult DeletePost(Post post) {
+			_postService.DeletePost(post);
+			return RedirectToAction("Home/Index");
 		}
 
 		// Use for multiple images and user tags

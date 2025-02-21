@@ -26,4 +26,10 @@
 		<a href="PostID/Comment">Comment</a>
 		<a href="PostID/save">Save</a>
 	</div>
+	@if (Model.UserId == ViewBag.User.UserId) {
+		<div class="edit">
+			<a href="Post/EditPost">Edit</a>
+			<a href="Post/Delete">Delete</a>
+		</div>
+	})
 </div>
