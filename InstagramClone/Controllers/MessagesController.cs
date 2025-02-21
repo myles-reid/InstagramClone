@@ -21,5 +21,30 @@ namespace InstagramClone.Controllers {
 			List<DirectMessage> messages = DirectMessageService.GetConnectedMessages(userIDtwo, userIDone);
 			return View(messages);
 		}
-	}
+
+        // create new message
+        [HttpGet]
+        public IActionResult NewDirectMessage()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult NewDirectMessage(DirectMessage newDirectMessage)
+        {
+            if (ModelState.IsValid)
+            {
+                DirectMessageService.NewMessage(newDirectMessage);
+                return RedirectToAction("Messages/Index");
+            }
+            return View(newDirectMessage);
+        }
+
+        //delete message
+        public IActionResult DeleteDirectMessage(DirectMessage newDirectMessage)
+        {
+            DirectMessageService.DeleteComment(newDirectMessage);
+            return RedirectToAction("Messages/Index");
+        }
+    }
 }
