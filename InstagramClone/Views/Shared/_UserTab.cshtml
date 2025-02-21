@@ -1,6 +1,11 @@
 ﻿@model User
 
-<div>
-	<img src="@Model.ProfilePicture" alt="ProfilePic" />
-	<h2>@Model.Username</h2>
+<div class="user-tab">
+    <img src="@Model.ProfilePicture" alt="Profile Picture" class="user-tab-pic" />
+
+    <div class="user-tab-info">
+        <h4>@Model.Username</h4>
+        <p class="bio">@Model.Bio</p>
+        <a href="@Url.Action("Profile", "User", new { username = Model.Username })" class="btn btn-sm btn-outline-primary">View Profile</a>
+    </div>
 </div>

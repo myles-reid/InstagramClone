@@ -3,27 +3,75 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <div>
-        <h1 class="display-4">InstaClone</h1>
-    </div>
-    <div>
-        <button class="btn accept-policy"><a href="Post/NewPost">New Post</a></button>
-    </div>
-    <div>
-        <!--Grid-->
-        <div>
-            @foreach (Post post in Model) {
-                <partial name="_Post" model="post" />
-            }
-        </div>
-        <div>
+<div class="container">
+    <div class="grid-container">
+        <!-- Left Sidebar (Optional) -->
+        <aside class="left-sidebar">
+            <h3>Suggestions</h3>
             @foreach (User user in ViewBag.Users)
             {
-				<partial name="_UserTab" model="user" />
+                <partial name="_UserTab" model="user" />
             }
-            <!--People you follow, etc-->
-        </div>
-    </div>
+        </aside>
 
+        <!-- Main Feed -->
+        <main class="main-feed">
+            <h1 class="display-4">InstaClone</h1>
+            <button class="btn accept-policy"><a href="Post/NewPost">New Post</a></button>
+
+            @foreach (Post post in Model)
+            {
+                <partial name="_Post" model="post" />
+            }
+        </main>
+
+        <!-- Right Sidebar (Following & Followers) -->
+        <aside class="right-sidebar">
+            <div class="following-section">
+                <h3>People You Follow</h3>
+                @foreach (User user in ViewBag.ActiveUser.Following)
+                {
+                    <partial name="_UserTab" model="user" />
+                }
+            </div>
+
+            <div class="followers-section">
+                <h3>Your Followers</h3>
+                @foreach (User user in ViewBag.ActiveUser.Followers)
+                {
+                    <partial name="_UserTab" model="user" />
+                }
+            </div>
+        </aside>
+    </div>
 </div>
+
+<!-- Styles for the Grid Layout -->
+<style>
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        gap: 20px;
+    }
+
+    .left-sidebar, .right-sidebar {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .main-feed {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .following-section, .followers-section {
+        margin-bottom: 20px;
+    }
+</style>
