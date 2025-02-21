@@ -3,7 +3,7 @@
 
 @{
 	ViewData["Title"] = "New Post";
-	User user = (User)TempData["ActiveUser"];
+	User user = ViewBag.User;
 }
 
 <h2>New Post</h2>
