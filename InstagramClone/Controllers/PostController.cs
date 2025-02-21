@@ -21,9 +21,14 @@ namespace InstagramClone.Controllers {
 
 		[HttpPost]
 		public IActionResult NewPost(Post newPost) {
+			ModelState.Remove("PostId");
+			ModelState.Remove("CreatedAt");
+			ModelState.Remove("Comments");
+			ModelState.Remove("User");
+			ModelState.Remove("UserInteractions");
 			if (ModelState.IsValid) {
 				_postService.AddPost(newPost);
-				return RedirectToAction("Home/Index");
+				return RedirectToAction("Index", "Home");
 			}
 			return View(newPost);
 		}

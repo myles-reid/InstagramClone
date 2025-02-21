@@ -3,13 +3,12 @@
 
 @{
 	ViewData["Title"] = "New Post";
-	User user = ViewBag.User;
 }
 
 <h2>New Post</h2>
 
 <form asp-action="NewPost">
-	<input type="hidden" asp-for="UserId" value="@user.UserId" />
+	<input type="hidden" asp-for="UserId" value="1" />
 	<div class="form-group">
 		<label asp-for="ImageUrl" class="lead"><strong>Add image file path</strong></label>
 		<input asp-for="ImageUrl" class="form-control" />

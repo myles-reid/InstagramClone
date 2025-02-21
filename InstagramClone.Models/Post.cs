@@ -1,6 +1,10 @@
-﻿namespace InstagramClone.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace InstagramClone.Models;
 
 public partial class Post {
+	[Key]
 	public int PostId { get; set; }
 
 	public int UserId { get; set; }
@@ -9,6 +13,7 @@ public partial class Post {
 
 	public string ImageUrl { get; set; } = null!;
 
+	[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
 	public DateTime? CreatedAt { get; set; }
 
 	public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
