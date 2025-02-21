@@ -21,9 +21,14 @@ namespace InstagramClone.Controllers {
 
 		[HttpPost]
 		public IActionResult NewPost(Post newPost) {
+			ModelState.Remove("PostId");
+			ModelState.Remove("CreatedAt");
+			ModelState.Remove("Comments");
+			ModelState.Remove("User");
+			ModelState.Remove("UserInteractions");
 			if (ModelState.IsValid) {
 				_postService.AddPost(newPost);
-				return RedirectToAction("Home/Index");
+				return RedirectToAction("Index", "Home");
 			}
 			return View(newPost);
 		}
@@ -40,14 +45,14 @@ namespace InstagramClone.Controllers {
 			if (ModelState.IsValid) {
 				Post oldPost = (Post)_postService.GetUserPosts(id).Where(p => p.UserId == id && p.PostId == post.PostId);
 				_postService.EditPost(oldPost);
-				return RedirectToAction("Home/Index");
+				return RedirectToAction("Index", "Home");
 			}
 			return View(post);
 		}
 
 		public IActionResult DeletePost(Post post) {
 			_postService.DeletePost(post);
-			return RedirectToAction("Home/Index");
+			return RedirectToAction("Index", "Home");
 		}
 
 		// Use for multiple images and user tags

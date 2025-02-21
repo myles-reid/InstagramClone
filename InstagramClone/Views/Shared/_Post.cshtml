@@ -4,6 +4,7 @@
 	//Use ViewBag.Interactions to get the interactions from controller
 	List<User> users = ViewBag.Users;
 	User user = users.Find(u => u.UserId == Model.UserId);
+	User active = (User)TempData["ActiveUser"];
 }
 
 
@@ -26,12 +27,10 @@
 		<a href="PostID/Comment">Comment</a>
 		<a href="PostID/save">Save</a>
 	</div>
-	@*
-	@if (Model.UserId == user.UserId) {
+	@if (Model.UserId == active.UserId) {
 		<div class="edit">
 			<a href="Post/EditPost">Edit</a>
-			<a href="Post/Delete">Delete</a>
+			<a href="Post/DeletePost">Delete</a>
 		</div>
 	}
-	*@
 </div>
