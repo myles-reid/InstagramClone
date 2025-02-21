@@ -10,19 +10,26 @@
     <div>
         <button class="btn accept-policy"><a href="Post/NewPost">New Post</a></button>
     </div>
-    <div>
-        <!--Grid-->
-        <div>
-            @foreach (Post post in Model) {
-                <partial name="_Post" model="post" />
-            }
-        </div>
-        <div>
-            @foreach (User user in ViewBag.Users)
-            {
-				<partial name="_UserTab" model="user" />
-            }
-            <!--People you follow, etc-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <div>
+                    <h2>@ViewBag.ActiveUser.Username</h2>
+                </div>
+            </div>
+            <!--Grid-->
+            <div class="col-sm">
+                @foreach (Post post in Model) {
+                    <partial name="_Post" model="post" />
+                }
+            </div>
+            <div class="col-sm">
+                @foreach (User user in ViewBag.Users)
+                {
+				    <partial name="_UserTab" model="user" />
+                }
+                <!--People you follow, etc-->
+            </div>
         </div>
     </div>
 

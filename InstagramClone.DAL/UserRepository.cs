@@ -13,7 +13,7 @@ namespace InstagramClone.DAL {
 		}
 
 		public User GetUserInfo(int id) {
-			return (User)_context.Users.Where(u => u.UserId == id);
+			return _context.Users.FirstOrDefault(u => u.UserId == id);
 		}
 
 		public void NewUser(User user) {
