@@ -15,6 +15,7 @@ namespace InstagramClone.Controllers {
 
 		[HttpGet]
 		public IActionResult NewPost() {
+			ViewBag.User = TempData["ActiveUser"];
 			return View();
 		}
 
